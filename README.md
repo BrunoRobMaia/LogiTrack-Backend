@@ -301,6 +301,7 @@ O sistema inclui dados de exemplo para demonstração:
 Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ---
+````
 
 <div align="center">
 
@@ -310,4 +311,3 @@ Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](L
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-perfil-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/brunorobertomaia/)
 
 </div>
-````
