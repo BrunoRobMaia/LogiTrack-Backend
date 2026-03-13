@@ -171,16 +171,6 @@ curl -X GET http://localhost:8080/api/veiculos \
 
 Este projeto está licenciado sob a **MIT License**.
 
----
-
-## 📞 Suporte
-
-- **Empresa**: LogAp IT Solutions
-- **Email**: contato@logap.com.br
-- **Website**: https://logap.com.br
-
----
-
 <div align="center">
 
 **Desenvolvido por Bruno Roberto**
