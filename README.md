@@ -1,9 +1,5 @@
 # 🚛 LogiTrack Pro
 
-<div align="center">
-
-![LogiTrack Pro Logo](https://img.shields.io/badge/LogiTrack-Pro-blue?style=for-the-badge&logo=truck&logoColor=white)
-
 **Sistema de Gestão de Frotas — LogAp IT Solutions**
 
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.5-green?style=flat-square&logo=spring-boot)](https://spring.io/projects/spring-boot)
@@ -11,246 +7,118 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?style=flat-square&logo=postgresql)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=flat-square&logo=docker)](https://www.docker.com/)
 
-</div>
-
 ---
 
-## 📋 Sumário
-
-- [Sobre o Projeto](#-sobre-o-projeto)
-- [🚀 Funcionalidades](#-funcionalidades)
-- [🛠️ Tecnologias](#️-tecnologias)
-- [📋 Pré-requisitos](#-pré-requisitos)
-- [🚀 Instalação e Execução](#-instalação-e-execução)
-- [🐳 Docker (Recomendado)](#-docker-recomendado)
-- [📊 Estrutura da API](#-estrutura-da-api)
-- [🗄️ Banco de Dados](#️-banco-de-dados)
-- [🔐 Autenticação](#-autenticação)
-- [📝 Documentação da API](#-documentação-da-api)
-- [🧪 Testes](#-testes)
-- [🤝 Contribuição](#-contribuição)
-- [📄 Licença](#-licença)
-
----
-
-## 📖 Sobre o Projeto
+## Sobre o Projeto
 
 O **LogiTrack Pro** é um sistema completo de gestão de frotas desenvolvido pela LogAp IT Solutions, projetado para otimizar o controle de veículos, viagens e manutenções. Com uma interface RESTful robusta e segura, o sistema oferece total visibilidade e controle sobre as operações logísticas.
 
-### 🎯 Objetivos Principais
+### 🎯 Funcionalidades Principais
 
-- **Gestão Eficiente**: Controle centralizado de toda a frota
-- **Rastreamento em Tempo Real**: Monitoramento de viagens e veículos
-- **Manutenção Preventiva**: Agendamento e controle de serviços
-- **Relatórios Inteligentes**: Análise de dados e projeções
+- **Gestão de Veículos**: Cadastro e consulta de veículos leves e pesados
+- **Controle de Viagens**: Registro de viagens com quilometragem e histórico
+- **Manutenção Programada**: Agendamento de serviços e controle de custos
+- **Dashboard**: Relatórios e projeções financeiras
 - **Segurança**: Autenticação JWT e controle de acesso
 
 ---
 
-## 🚀 Funcionalidades
+## � Instalação Rápida
 
-### 🚗 Gestão de Veículos
-
-- Cadastro de veículos leves e pesados
-- Consulta por placa, modelo e tipo
-- Histórico completo do veículo
-
-### 🛣️ Controle de Viagens
-
-- Registro de viagens com origem e destino
-- Controle de quilometragem percorrida
-- Histórico de viagens por veículo
-
-### 🔧 Manutenção Programada
-
-- Agendamento de serviços de manutenção
-- Controle de custos e status
-- Histórico de manutenções por veículo
-
-### 📊 Dashboard e Relatórios
-
-- Visão geral da frota
-- Projeções de custos de manutenção
-- Análise de utilização dos veículos
-
-### 🔐 Segurança
-
-- Autenticação via JWT
-- Controle de acesso por usuário
-- API protegida com Spring Security
-
----
-
-## 🛠️ Tecnologias
-
-| Tecnologia          | Versão | Descrição                     |
-| ------------------- | ------ | ----------------------------- |
-| **Java**            | 21     | Linguagem principal           |
-| **Spring Boot**     | 3.4.5  | Framework principal           |
-| **Spring Security** | 3.4.5  | Segurança e autenticação      |
-| **Spring Data JPA** | 3.4.5  | Persistência de dados         |
-| **PostgreSQL**      | 15     | Banco de dados relacional     |
-| **JWT**             | 0.11.5 | Tokens de autenticação        |
-| **Lombok**          | -      | Redução de código boilerplate |
-| **Docker**          | -      | Containerização               |
-| **Maven**           | -      | Gerenciamento de dependências |
-
----
-
-## 📋 Pré-requisitos
-
-### Ambiente de Desenvolvimento
+### Pré-requisitos
 
 - **Java 21** ou superior
 - **Maven 3.8+**
-- **PostgreSQL 15+** (se executar localmente)
-- **IDE** (IntelliJ IDEA, Eclipse ou VS Code)
+- **Docker Desktop** (recomendado)
 
-### Para Docker
-
-- **Docker Desktop** instalado
-- **Docker Compose** (geralmente incluído no Docker Desktop)
-
----
-
-## 🚀 Instalação e Execução
-
-### ⚠️ Passo 0: Configurar Variáveis de Ambiente
-
-**Antes de iniciar**, configure as variáveis de ambiente obrigatórias:
+### Opção 1: Docker (Recomendado)
 
 ```bash
-# 1. Copiar o arquivo de exemplo
-cp application.properties.example application.properties
+# 1. Clonar repositório
+git clone https://github.com/seu-usuario/logitrack.git
+cd logitrack
 
-# 2. Editar o arquivo application.properties com suas credenciais
+# 2. Configurar propriedades Docker
+cp src/main/resources/application-docker.properties.example src/main/resources/application-docker.properties
+
+# 3. Iniciar serviços
+docker-compose up --build
+
+# 4. Acessar aplicação
+# URL: http://localhost:8080
 ```
 
-````bash
+### Opção 2: Execução Local
 
-### Opção 1: Execução Local
+```bash
+# 1. Configurar banco PostgreSQL
+CREATE DATABASE logitrack;
+CREATE USER postgres WITH PASSWORD 'sua_senha';
+GRANT ALL PRIVILEGES ON DATABASE logitrack TO postgres;
 
-1. **Clone o repositório**
+# 2. Configurar propriedades
+cp src/main/resources/application.properties.example src/main/resources/application.properties
+# Edite com suas credenciais
 
-   ```bash
-   git clone https://github.com/seu-usuario/logitrack.git
-   cd logitrack
-   ```
+# 3. Executar migrações
+psql -U postgres -d logitrack -f sql/init.sql
 
-2. **Configure o banco de dados PostgreSQL**
+# 4. Iniciar aplicação
+./mvnw spring-boot:run
 
-   ```sql
-   CREATE DATABASE logitrack;
-   CREATE USER postgres WITH PASSWORD 'sua_senha_aqui';
-   GRANT ALL PRIVILEGES ON DATABASE logitrack TO postgres;
-   ```
-
-   > 🔒 **Segurança**: Configure credenciais seguras e utilize variáveis de ambiente em produção.
-
-3. **Execute as migrações**
-
-   ```bash
-   psql -U postgres -d logitrack -f sql/init.sql
-   ```
-
-4. **Inicie a aplicação**
-
-   ```bash
-   ./mvnw spring-boot:run
-   ```
-
-5. **Acesse a API**
-   - URL: http://localhost:8080
-   - Health Check: http://localhost:8080/actuator/health
+# 5. Acessar: http://localhost:8080
+```
 
 ---
 
-## 🐳 Docker (Recomendado)
+## 📊 API Endpoints
 
-#### 🚀 Início Rápido
+### 🔐 Autenticação
 
-1. **Clone e configure variáveis de ambiente**
+| Endpoint             | Método | Descrição         |
+| -------------------- | ------ | ----------------- |
+| `/api/auth/register` | POST   | Registrar usuário |
+| `/api/auth/login`    | POST   | Login             |
 
-   ```bash
-   git clone https://github.com/seu-usuario/logitrack.git
-   cd logitrack
+### 🚗 Veículos
 
-   # Configurar variáveis de ambiente
-   cp application-docker.properties.example application-docker.properties
-   # Editar application-docker.properties com suas credenciais
-   # Nota: O docker-compose.yml já está configurado para usar este arquivo, só adicione suas credenciais
-   # environment:
-   #   POSTGRES_DB: logitrack
-   #   POSTGRES_USER: seu_usuario
-   #   POSTGRES_PASSWORD: sua_senha
+| Endpoint             | Método | Descrição         |
+| -------------------- | ------ | ----------------- |
+| `/api/veiculos`      | GET    | Listar veículos   |
+| `/api/veiculos/{id}` | GET    | Buscar veículo    |
+| `/api/veiculos`      | POST   | Criar veículo     |
+| `/api/veiculos/{id}` | PUT    | Atualizar veículo |
+| `/api/veiculos/{id}` | DELETE | Excluir veículo   |
 
-   ```
+### 🛣️ Viagens
 
-2. **Inicie com Docker**
+| Endpoint            | Método | Descrição        |
+| ------------------- | ------ | ---------------- |
+| `/api/viagens`      | GET    | Listar viagens   |
+| `/api/viagens/{id}` | GET    | Buscar viagem    |
+| `/api/viagens`      | POST   | Criar viagem     |
+| `/api/viagens/{id}` | PUT    | Atualizar viagem |
+| `/api/viagens/{id}` | DELETE | Excluir viagem   |
 
-   ```bash
-   docker-compose up --build
-   ```
+### 🔧 Manutenções
 
-3. **Aguarde os serviços iniciarem**
-   - A aplicação estará disponível em: http://localhost:8080
-   - Banco de dados: localhost:5432
+| Endpoint                    | Método | Descrição            |
+| --------------------------- | ------ | -------------------- |
+| `/api/manutencoes`          | GET    | Listar manutenções   |
+| `/api/manutencoes/{id}`     | GET    | Buscar manutenção    |
+| `/api/manutencoes`          | POST   | Criar manutenção     |
+| `/api/manutencoes/{id}`     | PUT    | Atualizar manutenção |
+| `/api/manutencoes/{id}`     | DELETE | Excluir manutenção   |
+| `/api/manutencoes/proximas` | GET    | Próximas manutenções |
 
-4. **Verifique os serviços**
-   ```bash
-   docker-compose ps
-   ```
+### 📊 Dashboard
 
-## 📊 Estrutura da API
+| Endpoint                   | Método | Descrição           |
+| -------------------------- | ------ | ------------------- |
+| `/api/dashboard`           | GET    | Dashboard geral     |
+| `/api/projecao/financeira` | GET    | Projeção financeira |
 
-### Endpoints da API
-
-#### 🔐 Autenticação
-
-| Endpoint             | Método | Descrição              | Autenticação |
-| -------------------- | ------ | ---------------------- | ------------ |
-| `/api/auth/register` | POST   | Registrar novo usuário | Não          |
-| `/api/auth/login`    | POST   | Autenticar usuário     | Não          |
-
-#### 🚗 Veículos
-
-| Endpoint             | Método | Descrição                | Autenticação |
-| -------------------- | ------ | ------------------------ | ------------ |
-| `/api/veiculos`      | GET    | Listar todos os veículos | Sim          |
-| `/api/veiculos/{id}` | GET    | Buscar veículo por ID    | Sim          |
-| `/api/veiculos`      | POST   | Criar novo veículo       | Sim          |
-| `/api/veiculos/{id}` | PUT    | Atualizar veículo        | Sim          |
-| `/api/veiculos/{id}` | DELETE | Excluir veículo          | Sim          |
-
-#### 🛣️ Viagens
-
-| Endpoint            | Método | Descrição               | Autenticação |
-| ------------------- | ------ | ----------------------- | ------------ |
-| `/api/viagens`      | GET    | Listar todas as viagens | Sim          |
-| `/api/viagens/{id}` | GET    | Buscar viagem por ID    | Sim          |
-| `/api/viagens`      | POST   | Criar nova viagem       | Sim          |
-| `/api/viagens/{id}` | PUT    | Atualizar viagem        | Sim          |
-| `/api/viagens/{id}` | DELETE | Excluir viagem          | Sim          |
-
-#### 🔧 Manutenções
-
-| Endpoint                    | Método | Descrição                   | Autenticação |
-| --------------------------- | ------ | --------------------------- | ------------ |
-| `/api/manutencoes`          | GET    | Listar todas as manutenções | Sim          |
-| `/api/manutencoes/{id}`     | GET    | Buscar manutenção por ID    | Sim          |
-| `/api/manutencoes`          | POST   | Criar nova manutenção       | Sim          |
-| `/api/manutencoes/{id}`     | PUT    | Atualizar manutenção        | Sim          |
-| `/api/manutencoes/{id}`     | DELETE | Excluir manutenção          | Sim          |
-| `/api/manutencoes/proximas` | GET    | Listar próximas manutenções | Sim          |
-
-#### 📊 Dashboard e Relatórios
-
-| Endpoint                   | Método | Descrição                  | Autenticação |
-| -------------------------- | ------ | -------------------------- | ------------ |
-| `/api/dashboard`           | GET    | Dashboard geral do sistema | Sim          |
-| `/api/projecao/financeira` | GET    | Projeção financeira mensal | Sim          |
-
-### Exemplo de Requisição
+### Exemplo de Uso
 
 ```bash
 # Login
@@ -258,50 +126,60 @@ curl -X POST http://localhost:8080/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"usuario@exemplo.com","password":"senha123"}'
 
-# Registrar usuário
-curl -X POST http://localhost:8080/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"email":"novo@exemplo.com","password":"senha123","nome":"Novo Usuário"}'
-
-# Listar veículos (com autenticação)
+# Listar veículos (com token)
 curl -X GET http://localhost:8080/api/veiculos \
   -H "Authorization: Bearer SEU_TOKEN_JWT"
 ```
 
-> ⚠️ **Importante:** Ao rodar o projeto pela primeira vez (local ou via Docker),
-> a tabela `usuarios` é criada automaticamente pelo Spring Boot (via JPA/Hibernate).
-> Para usar o sistema, é necessário fazer um registro via frontend (web)
-> com um e-mail e senha.
+---
 
-### Dados Iniciais
+## 🛠️ Tecnologias
 
-O sistema inclui dados de exemplo para demonstração:
-
-- 4 veículos cadastrados
-- 3 viagens registradas
-- 3 manutenções agendadas
+| Tecnologia      | Versão | Uso                 |
+| --------------- | ------ | ------------------- |
+| Java            | 21     | Linguagem principal |
+| Spring Boot     | 3.4.5  | Framework           |
+| Spring Security | 3.4.5  | Segurança           |
+| PostgreSQL      | 15     | Banco de dados      |
+| JWT             | 0.11.5 | Autenticação        |
+| Docker          | -      | Containerização     |
+| Maven           | -      | Build/Dependências  |
 
 ---
 
 ## 🔐 Autenticação
 
-### JWT Token Flow
+### Fluxo JWT
 
-1. **Registro**: Crie uma conta via `/api/auth/register`
-2. **Login**: Envie credenciais para `/api/auth/login`
-3. **Token**: Receba um JWT válido (configurável via variáveis de ambiente)
-4. **Acesso**: Inclua o token no header `Authorization: Bearer <token>`
+1. **Registro**: POST `/api/auth/register`
+2. **Login**: POST `/api/auth/login` → Recebe JWT
+3. **Acesso**: Header `Authorization: Bearer <token>`
 
-> 🔒 **Segurança**: As configurações de JWT (secret, expiration) são gerenciadas via variáveis de ambiente e não expostas no código.
+### Response de Login
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "type": "Bearer",
+  "expiresIn": 86400
+}
+```
 
 ---
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
+Este projeto está licenciado sob a **MIT License**.
 
 ---
-````
+
+## 📞 Suporte
+
+- **Empresa**: LogAp IT Solutions
+- **Email**: contato@logap.com.br
+- **Website**: https://logap.com.br
+
+---
 
 <div align="center">
 
