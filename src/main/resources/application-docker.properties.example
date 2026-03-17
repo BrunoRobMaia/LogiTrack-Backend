@@ -1,6 +1,6 @@
 # 🔧 Configurações específicas para Docker
 # Use variáveis de ambiente para dados sensíveis
-spring.datasource.url=sua_url_aqui
+spring.datasource.url=jdbc:postgresql://db:5432/logitrack
 spring.datasource.username=suas_credenciais_aqui
 spring.datasource.password=suas_credenciais_aqui
 spring.datasource.driver-class-name=org.postgresql.Driver

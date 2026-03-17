@@ -35,16 +35,19 @@ O **LogiTrack Pro** é um sistema completo de gestão de frotas desenvolvido pel
 
 ```bash
 # 1. Clonar repositório
-git clone https://github.com/seu-usuario/logitrack.git
-cd logitrack
+git clone https://github.com/BrunoRobMaia/LogiTrack-Backend.git
 
-# 2. Configurar propriedades Docker
+# 2. Configurar propriedades Docker (rode o comando no terminal do VS Code)
 cp src/main/resources/application-docker.properties.example src/main/resources/application-docker.properties
+# Edite com suas credenciais
 
-# 3. Iniciar serviços
+# 3. Configurar docker-compose.yml
+# Edite as credenciais do banco de dados no arquivo docker-compose.yml
+
+# 4. Iniciar serviços
 docker-compose up --build
 
-# 4. Acessar aplicação
+# 5. Acessar aplicação
 # URL: http://localhost:8080
 ```
 
@@ -53,15 +56,12 @@ docker-compose up --build
 ```bash
 # 1. Configurar banco PostgreSQL
 CREATE DATABASE logitrack;
-CREATE USER postgres WITH PASSWORD 'sua_senha';
-GRANT ALL PRIVILEGES ON DATABASE logitrack TO postgres;
 
-# 2. Configurar propriedades
+# 2. Configurar propriedades (rode o comando no terminal do VS Code)
 cp src/main/resources/application.properties.example src/main/resources/application.properties
 # Edite com suas credenciais
 
-# 3. Executar migrações
-psql -U postgres -d logitrack -f sql/init.sql
+# 3. Copie o conteúdo do arquivo sql/init.sql e execute no seu banco de dados
 
 # 4. Iniciar aplicação
 ./mvnw spring-boot:run

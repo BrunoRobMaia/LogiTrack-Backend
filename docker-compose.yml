@@ -4,8 +4,8 @@ services:
     container_name: logitrack-db
     environment:
       POSTGRES_DB: logitrack
-      POSTGRES_USER: seu_usuario
-      POSTGRES_PASSWORD: sua_senha
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
     ports:
       - "5432:5432"
     volumes:
